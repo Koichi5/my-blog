@@ -1,0 +1,117 @@
+<article class="bg-white rounded-lg shadow-md p-8 mb-8">
+  <header class="mb-6">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4"><%= @post.title %></h1>
+    <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+      <span>投稿者: <strong class="text-gray-900"><%= @post.user.name %></strong></span>
+      <span>|</span>
+      <span>公開日: <%= @post.published_at&.strftime("%Y年%m月%d日") %></span>
+    </div>
+
+    <div id="like-section" class="flex items-center space-x-4 mb-6" data-controller="like" data-like-post-id-value="<%= @post.id %>">
+      <div id="like-button-container">
+        <% if @liked && @current_like %>
+          <%= button_to "❤️ いいね済み", post_like_path(@post, @current_like),
+              method: :delete,
+              remote: true,
+              class: "px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors cursor-pointer",
+              id: "like-button",
+              data: {
+                post_id: @post.id,
+                like_target: "button"
+              } %>
+        <% else %>
+          <%= button_to "🤍 いいね", post_likes_path(@post),
+              method: :post,
+              remote: true,
+              class: "px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors cursor-pointer",
+              id: "like-button",
+              data: {
+                post_id: @post.id,
+                like_target: "button"
+              } %>
+        <% end %>
+      </div>
+      <span id="likes-count" class="font-semibold text-gray-700" data-like-target="count">
+        <%= @likes_count %>件のいいね
+      </span>
+    </div>
+
+    <% if user_signed_in? && (current_user == @post.user || current_user.admin?) %>
+      <div class="flex space-x-4">
+        <%= link_to "編集", edit_post_path(@post), class: "text-blue-600 hover:text-blue-800 font-medium transition-colors" %>
+        <span>|</span>
+        <%= link_to "削除", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "text-red-600 hover:text-red-800 font-medium transition-colors" %>
+      </div>
+    <% end %>
+  </header>
+
+  <div class="markdown-content prose prose-lg max-w-none mt-6">
+    <%= markdown_to_html(@post.body) %>
+  </div>
+</article>
+
+<section class="bg-white rounded-lg shadow-md p-8">
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">コメント</h2>
+
+  <% if @post.comments.any? %>
+    <div class="space-y-4 mb-8">
+      <% @post.comments.order(created_at: :asc).each do |comment| %>
+        <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <p class="font-semibold text-gray-900">
+              <%= comment.author_name %>
+            </p>
+            <span class="text-sm text-gray-500">
+              <%= comment.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+            </span>
+          </div>
+          <p class="text-gray-700 mt-3"><%= simple_format(comment.content) %></p>
+          <% if user_signed_in? && (current_user == comment.user || current_user.admin?) %>
+            <div class="mt-3">
+              <%= link_to "削除", post_comment_path(@post, comment),
+                  data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                  class: "text-red-600 hover:text-red-800 text-sm font-medium transition-colors" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-600 mb-8">まだコメントがありません。</p>
+  <% end %>
+
+  <div class="border-t border-gray-200 pt-6">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">コメントを投稿</h3>
+    <%= form_with model: [@post, @post.comments.build], local: true, class: "space-y-4" do |f| %>
+      <% if @post.comments.build.errors.any? %>
+        <div id="error_explanation" class="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+          <ul class="list-disc list-inside text-red-700">
+            <% @post.comments.build.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% unless user_signed_in? %>
+        <div class="field">
+          <%= f.label :guest_name, "お名前", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= f.text_field :guest_name, required: true, class: "w-full max-w-md px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :content, "コメント", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.text_area :content, rows: 5, required: true, class: "w-full max-w-2xl px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "コメントを投稿", class: "bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors cursor-pointer font-medium" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<div class="mt-8">
+  <%= link_to "一覧に戻る", posts_path, class: "text-blue-600 hover:text-blue-800 font-medium transition-colors" %>
+</div>
