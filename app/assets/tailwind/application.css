@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+/* Design system tokens: Material Color ビルダー (css/light.css) 準拠 */
+@theme {
+  /* Semantic colors: css/light.css (Material 3 light) と同一 */
+  --color-primary: #4b5c92;
+  --color-on-primary: #ffffff;
+  --color-primary-hover: #324478;
+  --color-primary-container: #dbe1ff;
+  --color-on-primary-container: #324478;
+  --color-secondary: #595e72;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #dde1f9;
+  --color-on-secondary-container: #414659;
+  --color-secondary-container-hover: #c1c5dd;
+  --color-success: #324478;
+  --color-success-bg: #dbe1ff;
+  --color-success-text: #324478;
+  --color-danger: #ba1a1a;
+  --color-on-danger: #ffffff;
+  --color-danger-hover: #93000a;
+  --color-danger-bg: #ffdad6;
+  --color-danger-text: #93000a;
+  --color-background: #faf8ff;
+  --color-on-background: #1a1b21;
+  --color-surface: #faf8ff;
+  --color-on-surface: #1a1b21;
+  --color-surface-container-lowest: #ffffff;
+  --color-border: #757680;
+  --color-border-subtle: #c5c6d0;
+  --color-text: #1a1b21;
+  --color-text-muted: #45464f;
+  --color-text-muted-light: #757680;
+
+  /* Typography */
+  --font-size-heading-1: 2.25rem;
+  --font-size-heading-2: 1.5rem;
+  --font-size-heading-3: 1.25rem;
+  --font-size-body: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+
+  /* Spacing & layout */
+  --spacing-card: 2rem;
+  --spacing-section: 2rem;
+  --spacing-container-x: 1rem;
+  --radius-card: 0.5rem;
+  --radius-button: 0.375rem;
+  --container-max: 80rem;
+}
