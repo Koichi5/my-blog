@@ -1,0 +1,10 @@
+<%# Design system: card container. Locals: title (optional), content (required, use capture), extra_class (optional) %>
+<% title = local_assigns[:title] %>
+<% content = local_assigns[:content] %>
+<% extra_class = local_assigns[:extra_class].to_s %>
+<div class="<%= ds_card_classes(extra_class) %>">
+  <% if title.present? %>
+    <h2 class="text-2xl font-bold text-text mb-6"><%= title %></h2>
+  <% end %>
+  <%= content %>
+</div>

@@ -1,0 +1,9 @@
+<%# Design system: form field wrapper (label + input). Locals: form (f), field_name, label_text, input_html (rendered input from caller) %>
+<% form = local_assigns[:form] %>
+<% field_name = local_assigns[:field_name] %>
+<% label_text = local_assigns[:label_text] || field_name.to_s.humanize %>
+<% input_html = local_assigns[:input_html] %>
+<div class="field">
+  <%= form.label field_name, label_text, class: ds_form_field_classes %>
+  <%= input_html %>
+</div>

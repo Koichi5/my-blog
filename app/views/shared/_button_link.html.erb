@@ -1,0 +1,5 @@
+<%# Design system: link styled as button. Locals: url, label, variant (:primary | :secondary | :danger | :link), style (:filled | :elevated | :outlined | :text), method, data, class_extra %>
+<%= link_to local_assigns[:label], local_assigns[:url],
+    class: "#{ds_button_classes(local_assigns.fetch(:variant, :primary), local_assigns.fetch(:style, :filled))} #{local_assigns[:class_extra].to_s}".strip,
+    method: local_assigns[:method],
+    data: local_assigns[:data] || {} %>

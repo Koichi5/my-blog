@@ -1,0 +1,7 @@
+<%# Design system: flash alert. Locals: type (:notice | :alert), message %>
+<% type = local_assigns.fetch(:type, :notice) %>
+<% message = local_assigns[:message] %>
+<% return if message.blank? %>
+<div class="<%= ds_alert_classes(type) %>" role="alert">
+  <p><%= message %></p>
+</div>
