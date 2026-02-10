@@ -1,0 +1,59 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">ボタン</h1>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">Filled</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <%= link_to "Primary", "#", class: ds_button_classes(:primary, :filled) %>
+      <%= link_to "Secondary", "#", class: ds_button_classes(:secondary, :filled) %>
+      <%= link_to "Danger", "#", class: ds_button_classes(:danger, :filled) %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">Elevated</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <%= link_to "Primary", "#", class: ds_button_classes(:primary, :elevated) %>
+      <%= link_to "Secondary", "#", class: ds_button_classes(:secondary, :elevated) %>
+      <%= link_to "Danger", "#", class: ds_button_classes(:danger, :elevated) %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">Outlined</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <%= link_to "Primary", "#", class: ds_button_classes(:primary, :outlined) %>
+      <%= link_to "Secondary", "#", class: ds_button_classes(:secondary, :outlined) %>
+      <%= link_to "Danger", "#", class: ds_button_classes(:danger, :outlined) %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">Text</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <%= link_to "Primary", "#", class: ds_button_classes(:primary, :text) %>
+      <%= link_to "Secondary", "#", class: ds_button_classes(:secondary, :text) %>
+      <%= link_to "Danger", "#", class: ds_button_classes(:danger, :text) %>
+      <%= link_to "Link", "#", class: ds_button_classes(:link) %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">Link</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <%= render "shared/button_link", url: "#", label: "Filled Primary", variant: :primary %>
+      <%= render "shared/button_link", url: "#", label: "Elevated Primary", variant: :primary, style: :elevated %>
+      <%= render "shared/button_link", url: "#", label: "Outlined Secondary", variant: :secondary, style: :outlined %>
+      <%= render "shared/button_link", url: "#", label: "Text", variant: :primary, style: :text %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">使い方</h2>
+    <pre class="bg-surface border border-border rounded-lg p-6 text-sm overflow-x-auto"><code>&lt;%= link_to "送信", path, class: ds_button_classes(:primary) %&gt;
+&lt;%= link_to "キャンセル", path, class: ds_button_classes(:secondary, :outlined) %&gt;
+&lt;%= render "shared/button_link", url: new_post_path, label: "新規投稿", variant: :primary, style: :elevated %&gt;</code></pre>
+  </section>
+</div>

@@ -1,0 +1,71 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">タイポグラフィ</h1>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-4">見出し</h2>
+    <div class="space-y-4 border-l-4 border-border" style="padding-left: 2rem;">
+      <h1 class="text-4xl font-bold text-text">見出し 1（Heading 1）</h1>
+      <h2 class="text-2xl font-bold text-text">見出し 2（Heading 2）</h2>
+      <h3 class="text-xl font-bold text-text">見出し 3（Heading 3）</h3>
+    </div>
+    <pre class="mt-4 bg-surface border border-border rounded-lg p-4 text-sm overflow-x-auto"><code>&lt;h1 class="text-4xl font-bold text-text"&gt;...&lt;/h1&gt;
+&lt;h2 class="text-2xl font-bold text-text"&gt;...&lt;/h2&gt;
+&lt;h3 class="text-xl font-bold text-text"&gt;...&lt;/h3&gt;</code></pre>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-4">本文・補助テキスト</h2>
+    <div class="space-y-3 border-l-4 border-border" style="padding-left: 2rem;">
+      <p class="text-base text-text">本文テキスト（1rem）。ブログの本文やカードの説明に使います。</p>
+      <p class="text-sm text-text-muted">補助テキスト（0.875rem）。キャプションやメタ情報に使います。</p>
+    </div>
+    <pre class="mt-4 bg-surface border border-border rounded-lg p-4 text-sm overflow-x-auto"><code>&lt;p class="text-base text-text"&gt;本文&lt;/p&gt;
+&lt;p class="text-sm text-text-muted"&gt;補助テキスト&lt;/p&gt;</code></pre>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-4">フォントウェイト</h2>
+    <div class="space-y-2 border-l-4 border-border" style="padding-left: 2rem;">
+      <p class="text-text font-medium">Medium (500) — ラベルやサブ見出し</p>
+      <p class="text-text font-semibold">Semibold (600) — セクション見出し</p>
+      <p class="text-text font-bold">Bold (700) — ページタイトル・強調</p>
+    </div>
+    <pre class="mt-4 bg-surface border border-border rounded-lg p-4 text-sm overflow-x-auto"><code>font-medium   &lt;!-- 500 --&gt;
+font-semibold &lt;!-- 600 --&gt;
+font-bold     &lt;!-- 700 --&gt;</code></pre>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-4">コード・等幅</h2>
+    <p class="text-text-muted text-sm mb-4">コードスニペットや技術的な表記には font-mono（等幅）を使用。</p>
+    <div class="bg-surface border border-border rounded-lg p-4">
+      <code class="font-mono text-sm text-text">bin/rails tailwindcss:build</code>
+    </div>
+    <pre class="mt-4 bg-surface border border-border rounded-lg p-4 text-sm overflow-x-auto"><code>&lt;code class="font-mono text-sm text-text"&gt;...&lt;/code&gt;</code></pre>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-4">トークン一覧（@theme）</h2>
+    <table class="w-full border border-border rounded-lg overflow-hidden">
+      <thead>
+        <tr class="bg-border-subtle">
+          <th class="text-left p-3 text-sm font-semibold text-text">変数</th>
+          <th class="text-left p-3 text-sm font-semibold text-text">値</th>
+        </tr>
+      </thead>
+      <tbody class="text-sm text-text">
+        <tr><td class="p-3">--font-size-heading-1</td><td class="p-3">2.25rem</td></tr>
+        <tr><td class="p-3">--font-size-heading-2</td><td class="p-3">1.5rem</td></tr>
+        <tr><td class="p-3">--font-size-heading-3</td><td class="p-3">1.25rem</td></tr>
+        <tr><td class="p-3">--font-size-body</td><td class="p-3">1rem</td></tr>
+        <tr><td class="p-3">--font-size-sm</td><td class="p-3">0.875rem</td></tr>
+        <tr><td class="p-3">--font-weight-medium</td><td class="p-3">500</td></tr>
+        <tr><td class="p-3">--font-weight-semibold</td><td class="p-3">600</td></tr>
+        <tr><td class="p-3">--font-weight-bold</td><td class="p-3">700</td></tr>
+      </tbody>
+    </table>
+    <p class="mt-4 text-text-muted text-sm">Tailwind の text-4xl / text-2xl / text-xl は @theme の heading と対応。app/assets/tailwind/application.css を参照。</p>
+  </section>
+</div>

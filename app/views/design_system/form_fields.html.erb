@@ -1,0 +1,27 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">フォームフィールド</h1>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">例</h2>
+    <div class="<%= ds_card_classes %> max-w-xl">
+      <%= form_with url: "#", method: :get, local: true, class: "space-y-6" do |f| %>
+        <%= render "shared/form_field", form: f, field_name: :sample_text, label_text: "サンプル入力", input_html: f.text_field(:sample_text, class: ds_input_classes, placeholder: "プレースホルダー") %>
+        <%= render "shared/form_field", form: f, field_name: :sample_area, label_text: "テキストエリア", input_html: f.text_area(:sample_area, rows: 3, class: ds_input_classes, placeholder: "複数行") %>
+        <div class="pt-4">
+          <%= f.submit "送信", class: ds_button_classes(:primary) %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">使い方</h2>
+    <pre class="bg-surface border border-border rounded-lg p-6 text-sm overflow-x-auto"><code>&lt;%= render "shared/form_field",
+  form: f,
+  field_name: :body,
+  label_text: "本文",
+  input_html: f.text_area(:body, class: ds_input_classes) %&gt;</code></pre>
+  </section>
+</div>

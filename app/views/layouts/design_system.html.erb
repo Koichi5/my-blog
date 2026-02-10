@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "デザインシステム | My Blog" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-background">
+    <nav class="bg-surface border-b border-border shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <h1 class="text-xl font-bold">
+              <%= link_to "MyBlogApp", root_path, class: "text-text hover:text-primary transition-colors" %>
+            </h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <%= link_to "アプリに戻る", root_path, class: "text-text-muted hover:text-primary transition-colors" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <%= render "shared/alert", type: :notice, message: notice %>
+    <%= render "shared/alert", type: :alert, message: alert %>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="design-system-body flex flex-row gap-16">
+        <aside class="design-system-sidebar flex-shrink-0" style="width: 20%; min-width: 140px;">
+          <nav class="sticky top-8 space-y-1" aria-label="デザインシステムメニュー">
+            <%= link_to "一覧", design_system_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'index' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "アラート", design_system_alerts_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'alerts' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "ボタン", design_system_buttons_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'buttons' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "カード", design_system_cards_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'cards' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "フォームフィールド", design_system_form_fields_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'form_fields' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "タイポグラフィ", design_system_typography_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'typography' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "カラートークン", design_system_tokens_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'tokens' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+          </nav>
+        </aside>
+
+        <main class="design-system-main flex-1 min-w-0">
+          <div class="w-full max-w-4xl">
+            <%= turbo_frame_tag "design_system_content" do %>
+              <%= yield %>
+            <% end %>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

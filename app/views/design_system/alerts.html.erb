@@ -1,0 +1,23 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">アラート</h1>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">正常系</h2>
+    <div class="space-y-6">
+      <%= render "shared/alert", type: :notice, message: "コメントを投稿しました。" %>
+    </div>
+  </section>
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">異常系</h2>
+    <div class="space-y-6">
+      <%= render "shared/alert", type: :alert, message: "コメントの投稿に失敗しました。" %>
+    </div>
+  </section>
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">使い方</h2>
+    <pre class="bg-surface border border-border rounded-lg p-6 text-sm overflow-x-auto"><code>&lt;%= render "shared/alert", type: :notice, message: notice %&gt;
+&lt;%= render "shared/alert", type: :alert, message: alert %&gt;</code></pre>
+  </section>
+</div>

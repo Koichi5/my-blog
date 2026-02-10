@@ -1,0 +1,27 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">カード</h1>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">例</h2>
+    <div class="ds-card-grid">
+      <% card_content_with_title = capture do %>
+        <p class="text-text-muted">カードの本文です。content は capture で渡します。</p>
+      <% end %>
+      <%= render "shared/card", title: "タイトル付きカード", content: card_content_with_title %>
+      <% card_content_plain = capture do %>
+        <p class="text-text-muted">タイトルなしのカード。</p>
+      <% end %>
+      <%= render "shared/card", content: card_content_plain %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">使い方</h2>
+    <pre class="bg-surface border border-border rounded-lg p-6 text-sm overflow-x-auto"><code>&lt;% content = capture do %&gt;
+  &lt;p&gt;中身&lt;/p&gt;
+&lt;% end %&gt;
+&lt;%= render "shared/card", title: "コメント", content: content %&gt;</code></pre>
+  </section>
+</div>

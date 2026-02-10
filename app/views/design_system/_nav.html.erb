@@ -1,0 +1,8 @@
+<%# デザインシステム内のナビ。subpage が true のときは「一覧に戻る」を表示 %>
+<nav class="flex items-center gap-4 text-sm mb-10">
+  <%= link_to "アプリに戻る", root_path, class: "text-text-muted hover:text-primary transition-colors" %>
+  <% if local_assigns[:subpage] %>
+    <span class="text-border">/</span>
+    <%= link_to "デザインシステム一覧", design_system_path, class: "text-text-muted hover:text-primary transition-colors" %>
+  <% end %>
+</nav>
