@@ -1,31 +1,31 @@
 <div class="mb-8">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">記事一覧</h1>
+  <h1 class="text-3xl font-bold text-text mb-6">記事一覧</h1>
 
   <% if @posts.any? %>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <% @posts.each do |post| %>
-        <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
-          <h2 class="text-xl font-semibold text-gray-900 mb-3">
-            <%= link_to post.title, post, class: "hover:text-blue-600 transition-colors" %>
+        <article class="<%= ds_card_classes('hover:shadow-lg transition-shadow') %>">
+          <h2 class="text-xl font-semibold text-text mb-3">
+            <%= link_to post.title, post, class: "hover:text-primary transition-colors" %>
           </h2>
-          <div class="text-sm text-gray-500 mb-3">
+          <div class="text-sm text-text-muted mb-3">
             <span>投稿者: <%= post.user.name %></span>
             <span class="mx-2">|</span>
             <span>公開日: <%= post.published_at&.strftime("%Y年%m月%d日") %></span>
           </div>
-          <p class="text-gray-700 mb-4 line-clamp-3">
+          <p class="text-text-muted mb-4 line-clamp-3">
             <%= truncate(post.body, length: 150) %>
           </p>
-          <%= link_to "続きを読む", post, class: "text-blue-600 hover:text-blue-800 font-medium transition-colors" %>
+          <%= link_to "続きを読む", post, class: ds_button_classes(:link) %>
         </article>
       <% end %>
     </div>
   <% else %>
     <div class="text-center py-12">
-      <p class="text-xl text-gray-600 mb-4">まだ記事がありません。</p>
+      <p class="text-xl text-text-muted mb-4">まだ記事がありません。</p>
       <% unless user_signed_in? %>
-        <p class="text-gray-500">
-          <%= link_to "ログイン", new_user_session_path, class: "text-blue-600 hover:text-blue-800 font-medium" %>して記事を投稿しましょう！
+        <p class="text-text-muted">
+          <%= link_to "ログイン", new_user_session_path, class: ds_button_classes(:link) %>して記事を投稿しましょう！
         </p>
       <% end %>
     </div>
