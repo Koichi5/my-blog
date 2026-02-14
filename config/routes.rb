@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
+  # 自分の記事一覧（公開・下書き）
+  get "my_posts", to: "posts#my_posts", as: :my_posts
+
   # Posts resources with nested comments and likes
   resources :posts do
     resources :comments, only: [ :create, :destroy ]

@@ -1,23 +1,8 @@
 <div class="mb-8">
-  <h1 class="text-3xl font-bold text-text mb-6">記事一覧</h1>
-
   <% if @posts.any? %>
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="post-card-grid">
       <% @posts.each do |post| %>
-        <article class="<%= ds_card_classes('hover:shadow-lg transition-shadow') %>">
-          <h2 class="text-xl font-semibold text-text mb-3">
-            <%= link_to post.title, post, class: "hover:text-primary transition-colors" %>
-          </h2>
-          <div class="text-sm text-text-muted mb-3">
-            <span>投稿者: <%= post.user.name %></span>
-            <span class="mx-2">|</span>
-            <span>公開日: <%= post.published_at&.strftime("%Y年%m月%d日") %></span>
-          </div>
-          <p class="text-text-muted mb-4 line-clamp-3">
-            <%= truncate(post.body, length: 150) %>
-          </p>
-          <%= link_to "続きを読む", post, class: ds_button_classes(:link) %>
-        </article>
+        <%= render "post_card", post: post %>
       <% end %>
     </div>
   <% else %>

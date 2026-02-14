@@ -1,0 +1,25 @@
+<div class="mb-8">
+  <h1 class="text-3xl font-bold text-text mb-6">自分の記事</h1>
+  <p class="text-text-muted mb-6">投稿済み・下書きの記事一覧です。</p>
+
+  <% if @posts.any? %>
+    <div class="post-card-grid">
+      <% @posts.each do |post| %>
+        <%= render "post_card", post: post %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-12">
+      <p class="text-xl text-text-muted mb-4">まだ記事がありません。</p>
+      <% if can_create_post? %>
+        <p class="text-text-muted">
+          <%= link_to "新規投稿", new_post_path, class: ds_button_classes(:primary) %>して記事を作成しましょう。
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-6">
+  <%= link_to "記事一覧に戻る", posts_path, class: ds_button_classes(:link) %>
+</div>

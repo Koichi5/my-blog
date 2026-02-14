@@ -1,0 +1,25 @@
+<%# 記事一覧用カード: キャッチ画像（またはプレースホルダー）、タイトル、公開日。投稿者・管理者は編集・削除リンクを表示 %>
+<div class="post-card-wrapper">
+  <%= link_to post, class: "post-card block" do %>
+    <div class="post-card-catch">
+      <% if post.images.attached? && post.images.first.present? %>
+        <%= image_tag post.images.first, alt: post.title, class: "post-card-catch-img" %>
+      <% else %>
+        <div class="post-card-catch-placeholder" aria-hidden="true">
+          <span class="post-card-catch-icon" aria-hidden="true">📄</span>
+        </div>
+      <% end %>
+    </div>
+    <div class="post-card-body">
+      <h2 class="post-card-title"><%= post.title %></h2>
+      <p class="post-card-date"><%= post.published_at ? post.published_at.strftime("%Y/%m/%dに公開") : "下書き" %></p>
+    </div>
+  <% end %>
+  <% if can_manage_post?(post) %>
+    <div class="post-card-actions">
+      <%= link_to "編集", edit_post_path(post), class: "post-card-action-link" %>
+      <span class="post-card-action-sep">|</span>
+      <%= link_to "削除", post_path(post), data: { turbo_method: :delete, turbo_confirm: "この記事を削除しますか？" }, class: "post-card-action-link post-card-action-delete" %>
+    </div>
+  <% end %>
+</div>

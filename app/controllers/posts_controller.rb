@@ -1,10 +1,16 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_post, only: [ :show, :edit, :update, :destroy ]
+  before_action :ensure_can_create_post, only: [ :new, :create ]
   before_action :check_authorization, only: [ :edit, :update, :destroy ]
 
   def index
     @posts = Post.published.recent
+  end
+
+  # 自分の記事一覧（公開・下書き両方。status で絞らない）
+  def my_posts
+    @posts = Post.where(user_id: current_user.id).order(updated_at: :desc)
   end
 
   def show
@@ -59,8 +65,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def ensure_can_create_post
+    return if current_user.admin?
+    redirect_to posts_path, alert: "記事の投稿は現在、管理者のみ可能です。"
+  end
+
   def check_authorization
-    unless current_user == @post.user || current_user&.admin?
+    unless current_user == @post.user || current_user.admin?
       redirect_to posts_path, alert: "この記事を編集・削除する権限がありません。"
     end
   end
