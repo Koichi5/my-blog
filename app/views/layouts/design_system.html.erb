@@ -16,9 +16,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-background">
+  <body class="bg-surface">
     <nav class="bg-surface border-b border-border shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="layout-container px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
             <h1 class="text-xl font-bold">
@@ -35,7 +35,7 @@
     <%= render "shared/alert", type: :notice, message: notice %>
     <%= render "shared/alert", type: :alert, message: alert %>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="layout-container px-4 sm:px-6 lg:px-8 py-8">
       <div class="design-system-body flex flex-row gap-16">
         <aside class="design-system-sidebar flex-shrink-0" style="width: 20%; min-width: 140px;">
           <nav class="sticky top-8 space-y-1" aria-label="デザインシステムメニュー">
@@ -43,6 +43,7 @@
             <%= link_to "アラート", design_system_alerts_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'alerts' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
             <%= link_to "ボタン", design_system_buttons_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'buttons' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
             <%= link_to "カード", design_system_cards_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'cards' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
+            <%= link_to "ダイアログ", design_system_dialogs_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'dialogs' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
             <%= link_to "フォームフィールド", design_system_form_fields_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'form_fields' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
             <%= link_to "タイポグラフィ", design_system_typography_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'typography' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>
             <%= link_to "カラートークン", design_system_tokens_path, data: { turbo: false }, class: "block py-2 px-3 rounded-md text-sm #{action_name == 'tokens' ? 'font-semibold text-primary bg-border-subtle' : 'text-text-muted hover:text-text hover:bg-border-subtle'}" %>

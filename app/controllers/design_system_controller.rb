@@ -14,6 +14,9 @@ class DesignSystemController < ApplicationController
   def cards
   end
 
+  def dialogs
+  end
+
   def form_fields
   end
 

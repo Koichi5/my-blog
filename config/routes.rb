@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get "/design_system/alerts", to: "design_system#alerts", as: :design_system_alerts
     get "/design_system/buttons", to: "design_system#buttons", as: :design_system_buttons
     get "/design_system/cards", to: "design_system#cards", as: :design_system_cards
+    get "/design_system/dialogs", to: "design_system#dialogs", as: :design_system_dialogs
     get "/design_system/form_fields", to: "design_system#form_fields", as: :design_system_form_fields
     get "/design_system/typography", to: "design_system#typography", as: :design_system_typography
     get "/design_system/tokens", to: "design_system#tokens", as: :design_system_tokens

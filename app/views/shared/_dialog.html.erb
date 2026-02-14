@@ -1,0 +1,27 @@
+<%
+  dialog_id = local_assigns[:dialog_id] || "dialog-#{SecureRandom.hex(4)}"
+  title = local_assigns[:title]
+  trigger_label = local_assigns[:trigger_label]
+  cancel_label = local_assigns[:cancel_label] || "キャンセル"
+  confirm_label = local_assigns[:confirm_label] || "実行"
+  confirm_variant = local_assigns[:confirm_variant] || :primary
+%>
+<div data-controller="dialog">
+  <% if trigger_label.present? %>
+    <button type="button" data-action="click->dialog#open" class="<%= ds_button_classes(confirm_variant == :danger ? :danger : :primary) %>">
+      <%= trigger_label %>
+    </button>
+  <% end %>
+  <dialog id="<%= dialog_id %>" data-dialog-target="dialog" class="ds-dialog" aria-labelledby="<%= dialog_id %>-title">
+    <% if title.present? %>
+      <div class="ds-dialog-header" id="<%= dialog_id %>-title"><%= title %></div>
+    <% end %>
+    <div class="ds-dialog-body">
+      <%= yield %>
+    </div>
+    <div class="ds-dialog-footer">
+      <button type="button" data-action="click->dialog#close" class="<%= ds_button_classes(:secondary, :outlined) %>"><%= cancel_label %></button>
+      <button type="button" data-action="click->dialog#close" class="<%= ds_button_classes(confirm_variant) %>"><%= confirm_label %></button>
+    </div>
+  </dialog>
+</div>

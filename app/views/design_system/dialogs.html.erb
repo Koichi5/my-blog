@@ -1,0 +1,40 @@
+<div class="max-w-4xl space-y-12">
+  <div class="pb-10">
+    <h1 class="text-4xl font-bold text-text mb-4">ダイアログ</h1>
+    <p class="text-text-muted">確認や選択を促すモーダルダイアログです。native <code class="bg-border-subtle px-1 rounded">&lt;dialog&gt;</code> と Stimulus で開閉します。</p>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">基本のダイアログ</h2>
+    <div class="space-y-4">
+      <%= render "shared/dialog", dialog_id: "ds-dialog-basic", title: "操作の確認", trigger_label: "ダイアログを開く", cancel_label: "キャンセル", confirm_label: "実行" do %>
+        <p class="text-text">この操作を実行しますか？</p>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">確認ダイアログ（危険な操作）</h2>
+    <p class="text-text-muted mb-4">削除など取り消しが難しい操作では、メインのボタンを Danger にします。</p>
+    <div class="space-y-4">
+      <%= render "shared/dialog", dialog_id: "ds-dialog-confirm", title: "削除の確認", trigger_label: "削除する", cancel_label: "キャンセル", confirm_label: "削除", confirm_variant: :danger do %>
+        <p class="text-text">本当に削除しますか？この操作は取り消せません。</p>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-semibold text-text mb-6">使い方</h2>
+    <p class="text-text-muted mb-2">ラッパーに <code class="bg-border-subtle px-1 rounded">data-controller="dialog"</code>、開くボタンに <code class="bg-border-subtle px-1 rounded">data-action="click->dialog#open"</code>、<code class="bg-border-subtle px-1 rounded">&lt;dialog&gt;</code> に <code class="bg-border-subtle px-1 rounded">data-dialog-target="dialog"</code> を付与します。共有パーシャルを使う場合:</p>
+    <pre class="bg-surface border border-border rounded-lg p-6 text-sm overflow-x-auto"><code>&lt;%= render "shared/dialog",
+  dialog_id: "my-dialog",
+  title: "タイトル",
+  trigger_label: "開く",
+  cancel_label: "キャンセル",
+  confirm_label: "実行",
+  confirm_variant: :primary do %&gt;
+  &lt;p&gt;本文&lt;/p&gt;
+&lt;% end %&gt;</code></pre>
+    <p class="text-text-muted mt-4">実運用で「実行」押下時にフォーム送信などを行う場合は、ダイアログ内に form を置くか、confirm ボタンに <code class="bg-border-subtle px-1 rounded">data-action</code> で別のコントローラを指定してください。</p>
+  </section>
+</div>
