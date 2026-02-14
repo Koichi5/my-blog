@@ -35,12 +35,18 @@
                 <%= link_to "デザインシステム", design_system_path, class: "text-text-muted hover:text-primary transition-colors" %>
               <% end %>
               <% if user_signed_in? %>
-                <span class="text-text-muted">ようこそ、<%= current_user.name %>さん</span>
-                <%= link_to "自分の記事", my_posts_path, class: ds_button_classes(:link) %>
-                <% if can_create_post? %>
-                  <%= link_to "新規投稿", new_post_path, class: ds_button_classes(:link) %>
-                <% end %>
-                <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-text-muted hover:text-text transition-colors" %>
+                <div class="nav-account-wrap" data-controller="dropdown">
+                  <button type="button" class="nav-account-trigger" data-dropdown-target="trigger" data-action="click->dropdown#toggle" aria-haspopup="true" aria-expanded="false" aria-label="アカウントメニュー">
+                    <%= current_user.name %> <span aria-hidden="true">▼</span>
+                  </button>
+                  <div class="nav-dropdown-panel" data-dropdown-target="menu" role="menu">
+                    <%= link_to "自分の記事", my_posts_path, role: "menuitem", class: "block" %>
+                    <% if can_create_post? %>
+                      <%= link_to "新規投稿", new_post_path, role: "menuitem", class: "block" %>
+                    <% end %>
+                    <%= link_to "ログアウト", destroy_user_session_path, role: "menuitem", data: { turbo_method: :delete }, class: "block" %>
+                  </div>
+                </div>
               <% else %>
                 <%= link_to "ログイン", new_user_session_path, class: ds_button_classes(:link) %>
                 <%= link_to "サインアップ", new_user_registration_path, class: ds_button_classes(:primary) %>
