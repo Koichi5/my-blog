@@ -36,7 +36,7 @@
       </span>
     </div>
 
-    <% if user_signed_in? && (current_user == @post.user || current_user.admin?) %>
+    <% if can_manage_post?(@post) %>
       <div class="flex space-x-4">
         <%= link_to "編集", edit_post_path(@post), class: ds_button_classes(:link) %>
         <span>|</span>

@@ -1,36 +1,45 @@
-<div class="<%= ds_card_classes %>">
-  <h1 class="text-3xl font-bold text-text mb-6">記事編集</h1>
-
-  <%= form_with model: @post, local: true, class: "space-y-6" do |f| %>
-    <% if @post.errors.any? %>
-      <div id="error_explanation" class="bg-danger-bg border-l-4 border-danger p-4 text-danger-text">
-        <h2 class="font-semibold mb-2"><%= pluralize(@post.errors.count, "件のエラー") %>があります:</h2>
-        <ul class="list-disc list-inside">
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+<% content_for :body_class, "post-edit-page-layout" %>
+<% content_for :body_data_controller, "post-form" %>
+<% content_for :post_form_appbar do %>
+  <div class="flex items-center justify-between w-full">
+    <%= link_to post_path(@post), class: "post-new-appbar-back" do %>
+      <span class="post-new-appbar-arrow" aria-hidden="true">←</span>
+      <span class="sr-only">戻る</span>
     <% end %>
-
-    <%= render "shared/form_field", form: f, field_name: :title, label_text: "タイトル", input_html: f.text_field(:title, class: "#{ds_input_classes} max-w-2xl") %>
-
-    <div class="field" data-controller="upload" data-upload-editor-target="editor">
-      <%= f.label :body, "本文（Markdown形式）", class: ds_form_field_classes %>
-      <%= f.text_area :body, rows: 20, id: "post_body", data: { upload_target: "editor" }, class: "#{ds_input_classes} max-w-4xl font-mono text-sm" %>
-      <p class="text-sm text-text-muted mt-2">
-        画像や動画をドラッグ&ドロップでアップロードできます
-      </p>
+    <div class="post-new-appbar-actions">
+      <label class="post-new-toggle">
+        <input type="checkbox" value="1" <%= @post.draft? ? "checked" : "" %> data-post-form-target="draftToggle" data-action="change->post-form#toggle" />
+        <span class="post-new-toggle-slider"></span>
+        <span class="post-new-toggle-label">下書き</span>
+      </label>
+      <button type="submit" form="edit_post_form" class="post-new-appbar-submit">更新する</button>
     </div>
+  </div>
+<% end %>
 
-    <div class="field">
-      <%= f.label :status, "ステータス", class: ds_form_field_classes %>
-      <%= f.select :status, [["下書き", "draft"], ["公開", "published"]], {}, { class: ds_input_classes } %>
-    </div>
+<div class="post-new-page">
+  <%= form_with model: @post, local: true, class: "post-new-form", id: "edit_post_form" do |f| %>
+    <%= f.hidden_field :status, value: @post.status, data: { post_form_target: "statusInput" } %>
 
-    <div class="actions flex space-x-4">
-      <%= f.submit "更新する", class: ds_button_classes(:primary) %>
-      <%= link_to "キャンセル", @post, class: ds_button_classes(:secondary) %>
+    <div class="<%= ds_card_classes %> post-new-card">
+      <% if @post.errors.any? %>
+        <div id="error_explanation" class="bg-danger-bg border-l-4 border-danger p-4 text-danger-text">
+          <h2 class="font-semibold mb-2"><%= pluralize(@post.errors.count, "件のエラー") %>があります:</h2>
+          <ul class="list-disc list-inside">
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.text_field :title, class: "post-form-title", placeholder: "タイトルを入力", autofocus: true %>
+      </div>
+
+      <div class="field" data-controller="upload" data-upload-editor-target="editor">
+        <%= f.text_area :body, rows: 20, id: "post_body", data: { upload_target: "editor", controller: "textarea-autogrow", action: "input->textarea-autogrow#resize" }, class: "post-form-body font-mono text-sm", placeholder: "本文を入力（Markdown形式）。画像や動画はドラッグ&ドロップでアップロードできます。" %>
+      </div>
     </div>
   <% end %>
 </div>

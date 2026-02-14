@@ -18,28 +18,35 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-background">
-    <nav class="bg-surface border-b border-border shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <body class="bg-surface <%= yield :body_class %>"<% if content_for?(:body_data_controller) %> data-controller="<%= yield :body_data_controller %>"<% end %>>
+    <nav class="nav-bar border-b border-border shadow-sm">
+      <div class="layout-container px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">
-            <h1 class="text-xl font-bold">
-              <%= link_to "MyBlogApp", root_path, class: "text-text hover:text-primary transition-colors" %>
-            </h1>
-          </div>
-          <div class="flex items-center space-x-4">
-            <% if Rails.env.development? %>
-              <%= link_to "デザインシステム", design_system_path, class: "text-text-muted hover:text-primary transition-colors" %>
-            <% end %>
-            <% if user_signed_in? %>
-              <span class="text-text-muted">ようこそ、<%= current_user.name %>さん</span>
-              <%= link_to "新規投稿", new_post_path, class: ds_button_classes(:link) %>
-              <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-text-muted hover:text-text transition-colors" %>
-            <% else %>
-              <%= link_to "ログイン", new_user_session_path, class: ds_button_classes(:link) %>
-              <%= link_to "サインアップ", new_user_registration_path, class: ds_button_classes(:primary) %>
-            <% end %>
-          </div>
+          <% if content_for?(:post_form_appbar) %>
+            <%= yield :post_form_appbar %>
+          <% else %>
+            <div class="flex items-center">
+              <h1 class="text-xl font-bold">
+                <%= link_to "MyBlogApp", root_path, class: "text-text hover:text-primary transition-colors" %>
+              </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+              <% if Rails.env.development? %>
+                <%= link_to "デザインシステム", design_system_path, class: "text-text-muted hover:text-primary transition-colors" %>
+              <% end %>
+              <% if user_signed_in? %>
+                <span class="text-text-muted">ようこそ、<%= current_user.name %>さん</span>
+                <%= link_to "自分の記事", my_posts_path, class: ds_button_classes(:link) %>
+                <% if can_create_post? %>
+                  <%= link_to "新規投稿", new_post_path, class: ds_button_classes(:link) %>
+                <% end %>
+                <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-text-muted hover:text-text transition-colors" %>
+              <% else %>
+                <%= link_to "ログイン", new_user_session_path, class: ds_button_classes(:link) %>
+                <%= link_to "サインアップ", new_user_registration_path, class: ds_button_classes(:primary) %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </nav>
@@ -47,7 +54,7 @@
     <%= render "shared/alert", type: :notice, message: notice %>
     <%= render "shared/alert", type: :alert, message: alert %>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="layout-container px-4 sm:px-6 lg:px-8 py-8">
       <%= yield %>
     </div>
   </body>
