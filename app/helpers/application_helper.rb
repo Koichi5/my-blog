@@ -3,7 +3,7 @@ module ApplicationHelper
   # variant: :primary | :secondary | :danger | :link
   # style: :filled (default) | :elevated | :outlined | :text
   def ds_button_classes(variant = :primary, style = :filled)
-    base = "inline-block px-4 py-2 rounded-md font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2"
+    base = "ds-btn inline-block px-4 py-2 font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2"
     style = :text if variant == :link
     case style
     when :elevated
@@ -77,6 +77,17 @@ module ApplicationHelper
   end
 
   public
+
+  # 権限: 記事を新規投稿してよいか（現状は管理者のみ。将来は general も許可する想定）
+  def can_create_post?
+    current_user&.admin?
+  end
+
+  # 権限: 指定した記事の編集・削除をしてよいか（投稿者本人 or 管理者）
+  def can_manage_post?(post)
+    return false unless user_signed_in?
+    current_user == post.user || current_user.admin?
+  end
 
   # Design system: card container classes
   def ds_card_classes(extra = "")
